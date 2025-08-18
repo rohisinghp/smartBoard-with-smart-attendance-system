@@ -6,5 +6,5 @@ export  const  initsocket=async()=>{
         timeout:1000,
         transports:["websocket"],
     }
-    return io("http://localhost:5000/",option) 
+    return io("https://smartboard-with-smart-attendance-system-2.onrender.com/",option) 
 }

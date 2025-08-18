@@ -25,13 +25,6 @@ export const ThemeProvider=({children})=>{
 
   }, []);
 
-  
-
-
-
-
-
-
     const themeValue={
         pen,
         penColor,
