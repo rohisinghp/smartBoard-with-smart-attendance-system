@@ -84,7 +84,6 @@ const changeMark=(number)=>{
 }
    //leave
 
-    
 
     useEffect(()=>{
       const init=async()=>{

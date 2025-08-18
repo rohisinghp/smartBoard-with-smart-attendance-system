@@ -17,15 +17,34 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
 
 const _dirname = path.resolve();
 
 app.use(cookieParser());
-app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors({
+  origin: [
+    "http://localhost:5173",          // local frontend (Vite default)
+    "https://smartboard-with-smart-attendance-system-2.onrender.com" // deployed frontend
+  ],
+  methods: ["GET", "POST"],
+  credentials: true
+}));
+
+// ✅ Setup socket.io with same CORS
+const io = new Server(server, {
+  cors: {
+    origin: [
+      "http://localhost:5173",
+      "https://smartboard-with-smart-attendance-system-2.onrender.com"
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
 
 // Socket.IO logic
 const roomAdmins = new Map();
