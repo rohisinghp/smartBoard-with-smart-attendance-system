@@ -16,7 +16,7 @@ const useAdminLogin = () => {
         }
 
         try {
-            const res = await fetch("https://smartboard-with-smart-attendance-system-2.onrender.com//auth/admin/login", {
+            const res = await fetch("https://smartboard-with-smart-attendance-system-2.onrender.com/auth/admin/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
