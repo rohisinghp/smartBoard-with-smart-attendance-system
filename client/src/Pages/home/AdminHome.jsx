@@ -43,43 +43,43 @@ const AdminHome = () => {
   //     participants: "1,3,4,5,7,8,14,15,19,21,25,26,27,35,38,39"
   //   }
   // ]
-  
-  const [data,setData] = useState();
+
+  const [data, setData] = useState();
 
   const [sortedData, setSortedData] = useState([]);
   const [currentItem, setCurrentItem] = useState(null);
   useEffect(() => {
     async function getClassroomsForAdmin() {
-    try {
-      console.log(user);
-      const admin_id = user.admin_id;
-      // console.log("Admin ID:", admin_id);
+      try {
+        console.log(user);
+        const admin_id = user.admin_id;
+        // console.log("Admin ID:", admin_id);
 
-      const res = await axios.post(
-        "http://localhost:5000/classroom/api/getclassroom",
-        { admin_id }
-      );
+        const res = await axios.post(
+          "http://localhost:5000/classroom/api/getclassroom",
+          { admin_id }
+        );
 
-      const classrooms = res.data.classrooms;
+        const classrooms = res.data.classrooms;
 
-      const cleaned = classrooms.filter(item => Object.keys(item).length > 0); // remove empty objects
-      console.log("Cleaned classrooms:", cleaned,);
+        const cleaned = classrooms.filter(item => Object.keys(item).length > 0); // remove empty objects
+        console.log("Cleaned classrooms:", cleaned,);
 
-      setData(cleaned);
+        setData(cleaned);
 
-      // --------------------------------------------------------------------------------------------------------------------------
+        // --------------------------------------------------------------------------------------------------------------------------
 
 
-    } catch (e) {
-      console.error("Error in fetching classrooms:", e);
-      toast("Something went wrong: " + (e.response?.data?.message || e.message));
+      } catch (e) {
+        console.error("Error in fetching classrooms:", e);
+        toast("Something went wrong: " + (e.response?.data?.message || e.message));
+      }
     }
-  }
     getClassroomsForAdmin();
   }, [])
 
   function dateToNumber(dateStr) {
-    if(dateStr == undefined) return 20000101;
+    if (dateStr == undefined) return 20000101;
     const parts = dateStr.split('/');
     const day = parts[0];
     const month = parts[1];
@@ -130,9 +130,9 @@ const AdminHome = () => {
     }
   }
 
-  
 
-  ;
+
+    ;
   const [searchTerm, setSearchTerm] = useState('');
   function isEqualIgnoreCase(a, b) {
     const charCodeA = a.charCodeAt(0);
@@ -160,17 +160,17 @@ const AdminHome = () => {
         break;
       }
     }
-    if(date != undefined)
-    for (let j = 0; j <= date.length - term.length; j++) {
-      let k = 0;
-      while (k < term.length && isEqualIgnoreCase(date[j + k], term[k])) {
-        k++;
+    if (date != undefined)
+      for (let j = 0; j <= date.length - term.length; j++) {
+        let k = 0;
+        while (k < term.length && isEqualIgnoreCase(date[j + k], term[k])) {
+          k++;
+        }
+        if (k === term.length) {
+          matchFound = true;
+          break;
+        }
       }
-      if (k === term.length) {
-        matchFound = true;
-        break;
-      }
-    }
 
     if (matchFound || term === '') {
       manuallyFilteredData.push(item);
@@ -190,13 +190,15 @@ const AdminHome = () => {
         display: 'flex',
         flex: 1,
         p: 3,
-        gap: 3
-      }}>
+        gap: 3,
+        height: '100vh'
+              }}>
         {/* Past Meetings Section */}
         <Paper
           elevation={3}
           sx={{
             width: '25%',
+            height: '100vh',
             p: 3,
             backgroundColor: 'rgba(255, 255, 255, 0.95)',
             borderRadius: 2,
@@ -246,7 +248,7 @@ const AdminHome = () => {
           <List sx={{ overflow: 'auto', flex: 1 }}>
             {manuallyFilteredData.length > 0 ? (
               manuallyFilteredData.map((item, index) => (
-                
+
                 <ListItem
                   key={index}
                   sx={{
@@ -357,8 +359,10 @@ const AdminHome = () => {
               </Typography>
 
               <Typography variant="h6" sx={{ color: '#000000', ml: 4 }}>
-                <strong>Presentees:</strong> {currentItem.participants}
+                <strong>Presentees (Class Roll No):</strong>
+                {currentItem.participants.map((p) => p.class_rollno).join(", ")}
               </Typography>
+
             </Paper>
           )}
 
