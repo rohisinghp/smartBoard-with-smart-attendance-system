@@ -20,7 +20,7 @@ const useUserSignup = () => {
             };
             delete transformedInput.fullName;
 
-            const res = await fetch("http://localhost:5000/auth/user/signup", {
+            const res = await fetch("https://smartboard-with-smart-attendance-system-2.onrender.com/auth/user/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -14,7 +14,7 @@ const useUserLogin = () => {
         }
 
         try {
-            const res = await fetch("http://localhost:5000/auth/user/login", {
+            const res = await fetch("https://smartboard-with-smart-attendance-system-2.onrender.com/auth/user/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

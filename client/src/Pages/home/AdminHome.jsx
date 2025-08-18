@@ -56,7 +56,7 @@ const AdminHome = () => {
         // console.log("Admin ID:", admin_id);
 
         const res = await axios.post(
-          "http://localhost:5000/classroom/api/getclassroom",
+          "https://smartboard-with-smart-attendance-system-2.onrender.com/classroom/api/getclassroom",
           { admin_id }
         );
 
